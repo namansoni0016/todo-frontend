@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { useContext } from 'react';
+import { Context } from '../main';
+import Loader from '../components/Loader';
 
 const Profile = () => {
+    const {isAuthenticated, loading, user } = useContext(Context);
+    
     return (
-        <div>Profile</div>
+        loading ? <Loader/> : (
+            <div>
+                <h1>{user?.name}</h1>
+                <p>{user?.email}</p>
+            </div>
+        )
     )
 }
 

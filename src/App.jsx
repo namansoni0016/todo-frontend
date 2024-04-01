@@ -12,16 +12,19 @@ import { Context } from './main';
 import { useContext } from 'react';
 
 function App() {
-  const {setUser, setIsAuthenticated} = useContext(Context);
+  const {setUser, setIsAuthenticated, setLoading} = useContext(Context);
   useEffect(() => {
+    setLoading(true);
     axios.get(`${server}/users/me`, {
       withCredentials: true,
     }).then(res=> {
       setUser(res.data.user);
       setIsAuthenticated(true);
+      setLoading(false);
     }).catch((error) => {
       setUser({});
       setIsAuthenticated(true);
+      setLoading(false);
     })
   }, [])
 
